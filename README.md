@@ -12,8 +12,8 @@ This project started out as the tutotial from the React site. The current level 
 
 These are the current items on my TODO list for added features, refactoring:
 
-1. Make the move list a separate component to Game and include it as others have been (i.e. proper component use)
 1. Allow the choice of who goes first X or O
+1. Keep tally of wins (allow reset)
 1. Provide a setup screen where players can enter their name and select X or O
 1. Add a randomiser to which starts first X or O
 1. Allow the addition of an Avatar for the user and use the avatar instead of X or O
