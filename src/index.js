@@ -67,7 +67,7 @@ class Game extends React.Component {
     };
   }
 
-  handleClick(i){
+  squareClick(i){
     const rowcollocation = [
       '[1, 1]','[1, 2]','[1, 3]',
       '[2, 1]','[2, 2]','[2, 3]',
@@ -142,11 +142,11 @@ class Game extends React.Component {
         <Board 
           squares={current.squares}
           winpattern={winner ? winner.pattern : []}
-          onClick={(i) => this.handleClick(i)}
+          onClick={(i) => this.squareClick(i)}
         />
       </div>
       <div className="game-info">
-        <div>{status}</div>
+        <div className="game-status">{status}</div>
         <button onClick={() => this.toggleMoveOrder()}>
             {this.state.moveorder === 'oldest' ? 'See Moves newset first' : 'See Moves oldest first'}
         </button>
