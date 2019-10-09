@@ -53,6 +53,52 @@ class Board extends React.Component {
   }
 }
 
+class MoveHistory extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      moveorder: 'oldest',
+    };
+  }
+
+  toggleMoveOrder(){
+    this.setState({
+      moveorder: (this.state.moveorder === 'newest') ? 'oldest' : 'newest',
+    });
+  }
+
+  render(){
+    const moves = this.props.history.map((step,move) => {
+      //step = current value, move = index
+      const desc = move ?
+        'Go to move #' + move + ' @ ' + this.props.history[move].location:
+        'Go to game start [Row, Col]';
+      return (
+        <li key={move}>
+          <button onClick={() => this.props.jumpTo(move)}>
+            {move === this.props.stepNumber ? <b>{desc}</b> : desc}
+          </button>
+        </li>
+      );
+    })
+
+    //reverse the sort order here if needed
+    if(this.state.moveorder === 'newest'){
+      moves.reverse();
+    }
+
+    return (
+      <div className="move-list">
+        {/* {this.renderMoveSortButton()} */}
+        <button onClick={() => this.toggleMoveOrder()}>
+            {this.state.moveorder === 'oldest' ? 'See Moves newset first' : 'See Moves oldest first'}
+        </button>
+        <ol>{moves}</ol>
+      </div>
+    );        
+  }
+}
+
 class Game extends React.Component {
   constructor(props){
     super(props);
@@ -63,7 +109,6 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
-      moveorder: 'oldest',
     };
   }
 
@@ -98,42 +143,16 @@ class Game extends React.Component {
     });
   }
 
-  toggleMoveOrder(){
-    this.setState({
-      moveorder: (this.state.moveorder === 'newest') ? 'oldest' : 'newest',
-    });
-  }
-
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    const moveorder = this.state.moveorder;
-
-    const moves = history.map((step,move) => {
-      //step = currenct value, move = index
-      const desc = move ?
-        'Go to move #' + move + ' @ ' + history[move].location:
-        'Go to game start [Row, Col]';
-      return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>
-            {move === this.state.stepNumber ? <b>{desc}</b> : desc}
-          </button>
-        </li>
-      );
-    })
-
-    //reverse the order here!!
-    if(moveorder === 'newest'){
-      moves.reverse();
-    }
 
     let status;
     if(winner){
       status = 'Winner: ' + winner.XorY;
     }else{
-      status = (moves.length < 10)?'Next player: ' + (this.state.xIsNext ? 'X' : 'O'):'DRAW!';
+      status = (history.length < 10)?'Next player: ' + (this.state.xIsNext ? 'X' : 'O'):'DRAW!';
     }
 
     return (
@@ -147,10 +166,11 @@ class Game extends React.Component {
       </div>
       <div className="game-info">
         <div className="game-status">{status}</div>
-        <button onClick={() => this.toggleMoveOrder()}>
-            {this.state.moveorder === 'oldest' ? 'See Moves newset first' : 'See Moves oldest first'}
-        </button>
-        <ol>{moves}</ol>
+        <MoveHistory
+          history={history}
+          jumpTo={(step) => this.jumpTo(step)}
+          stepNumber={this.state.stepNumber}
+        />
       </div>
       </div>
     );
