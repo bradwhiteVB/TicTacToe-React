@@ -6,6 +6,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This project started out as the tutotial from the React site. The current level of features is shown below. As the pipeline is developed (when I wish to have fun) it will be added to this section:
 1. Basic Tic Tac Toe board with move history - tutorial endpoint (https://reactjs.org/tutorial/tutorial.html)
 1. Extra tasks suggested in the wrap up section of tutorial - (https://reactjs.org/tutorial/tutorial.html#wrapping-up)
+1. Refactored to work with the default build structure (i.e. App.js and index.js setup) after running the following command.  This allows for easier implementation of the react-router for later updates
+    ```
+    npx create-react-app <app-name>
+    ```
+1. WIP 
+
  
 
 ## Pipeline
