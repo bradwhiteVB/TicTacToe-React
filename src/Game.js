@@ -166,6 +166,7 @@ export default class Game extends React.Component {
       </div>
       <div className="game-info">
         <div className="game-status">{status}</div>
+        <p>{this.props.xIsFirst?'True':'False'}</p>
         <MoveHistory
           history={history}
           jumpTo={(step) => this.jumpTo(step)}
