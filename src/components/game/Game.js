@@ -139,7 +139,6 @@ export default class Game extends React.Component {
   }
   
   jumpTo(step){
-    //this.props.xIsFirst
     this.setState({
       stepNumber: step,
       xIsNext: (this.props.xIsFirst)?(step % 2) === 0:(step % 2) !== 0,
