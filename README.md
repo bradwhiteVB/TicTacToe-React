@@ -20,12 +20,12 @@ These are the current items on my TODO list for added features, refactoring:
 
 1. Allow the choice of who goes first X or O
 1. Keep tally of wins (allow reset)
-1. Provide a setup screen where players can enter their name and select X or O
 1. Add a randomiser to which starts first X or O
-1. Allow the addition of an Avatar for the user and use the avatar instead of X or O
 1. Allow a Play Computer option
     1. first effort to be random selection (Easy mode)
     1. second game tree (Hard mode)
+1. Provide a setup screen where players can enter their name and select X or O
+1. Allow the addition of an Avatar for the user and use the avatar instead of X or O
 
 
 ## Available Scripts

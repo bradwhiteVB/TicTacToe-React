@@ -108,7 +108,9 @@ export default class Game extends React.Component {
         location: '[Row, Col]'
       }],
       stepNumber: 0,
-      xIsNext: true,
+      xIsNext: this.props.xIsFirst,
+      gameType: this.props.gameType,
+      keepTally: this.props.keepTally,
     };
   }
 
@@ -137,9 +139,10 @@ export default class Game extends React.Component {
   }
   
   jumpTo(step){
+    //this.props.xIsFirst
     this.setState({
       stepNumber: step,
-      xIsNext: (step % 2) === 0,
+      xIsNext: (this.props.xIsFirst)?(step % 2) === 0:(step % 2) !== 0,
     });
   }
 
@@ -156,6 +159,10 @@ export default class Game extends React.Component {
     }
 
     return (
+      <div className="gamepage">
+      <div className="setupLink">
+        {this.props.settingsLink}
+      </div>
       <div className="game">
       <div className="game-board">
         <Board 
@@ -166,12 +173,14 @@ export default class Game extends React.Component {
       </div>
       <div className="game-info">
         <div className="game-status">{status}</div>
-        <p>{this.props.xIsFirst?'True':'False'}</p>
+        {/* <p>{this.props.xIsFirst?'True':'False'}</p>
+        <p>{this.props.gameType}</p> */}
         <MoveHistory
           history={history}
           jumpTo={(step) => this.jumpTo(step)}
           stepNumber={this.state.stepNumber}
         />
+      </div>
       </div>
       </div>
     );
