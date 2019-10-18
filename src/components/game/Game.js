@@ -72,7 +72,7 @@ export default class Game extends React.Component {
     return (
       <div className="gamepage">
       <div className="setupLink">
-        <Link className="pageLink" to="/">Setup</Link>
+        <Link className="pageLink" to="/">Back to Setup</Link>
       </div>
       <div className="game">
       <div className="game-board">

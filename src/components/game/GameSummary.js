@@ -1,4 +1,5 @@
 import React from 'react';
+import './GameSummary.css';
 export function GameSummary(props) {
   let tallyX = '';
   let tallyO = '';
