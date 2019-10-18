@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import './Setup.css';
 
 /*
@@ -113,7 +114,7 @@ export default class Settings extends React.Component {
           appLvlFunctionToCall={this.props.setGameType}
         />
 
-        {this.props.gameLink}
+        <Link className="pageLink" to="/game">Play Game</Link>
       </div>
     );
   }

@@ -3,8 +3,7 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Game from '../game/Game'
 import Settings from '../setup/Setup'
@@ -50,7 +49,6 @@ class App extends React.Component {
                 setKeepTally={this.setKeepTally}
                 setGameType={this.setGameType}
                 appState={this.state}
-                gameLink={<Link className="pageLink" to="/game">Play Game</Link>}
               />
             </Route>
             <Route exact path="/game">
@@ -58,7 +56,6 @@ class App extends React.Component {
                 xIsFirst={this.state.xIsFirst}
                 keepTally={this.state.keepTally}
                 gameType={this.state.gameType}
-                settingsLink={<Link className="pageLink" to="/">Setup</Link>}
               />
             </Route>
             <Route path="*">

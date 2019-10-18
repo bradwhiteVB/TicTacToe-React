@@ -1,103 +1,9 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
+import {Link} from "react-router-dom";
 import './Game.css';
-
-function Square(props) {
-  let className = 'square '+props.winclass;
-  return (
-    <button 
-      className={className}
-      onClick={() => props.onClick()}
-    >
-    {props.value}
-    </button>
-  );
-}
-  
-class Board extends React.Component {
-  renderSquare(i, winclass) {
-    return (
-      <Square 
-        key={"square " + i}
-        winclass={winclass}
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
-
-  render() {
-    const boardItems = [];
-    const numRows = 3;
-    const numCols = 3;
-
-    console.log(this.props.winpattern);
-
-    // Outer loop to create row divs
-    for (let i = 0; i < numRows; i++) {
-      let columns = []
-      //Inner loop to create children
-      for (let j = 0; j < numCols; j++) {
-        let winclass = (this.props.winpattern.indexOf((i*numCols)+j) < 0)?'':'winsquare';
-        columns.push(this.renderSquare((i*numCols)+j, winclass))
-      }
-      //Create the parent and add the children
-      boardItems.push(<div key={"div"+i} className="board-row">{columns}</div>)
-    }
-
-    return (
-      <div>
-        {boardItems}
-      </div>
-    );
-  }
-}
-
-class MoveHistory extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      moveorder: 'oldest',
-    };
-  }
-
-  toggleMoveOrder(){
-    this.setState({
-      moveorder: (this.state.moveorder === 'newest') ? 'oldest' : 'newest',
-    });
-  }
-
-  render(){
-    const moves = this.props.history.map((step,move) => {
-      //step = current value, move = index
-      const desc = move ?
-        'Go to move #' + move + ' @ ' + this.props.history[move].location:
-        'Go to game start [Row, Col]';
-      return (
-        <li key={move}>
-          <button onClick={() => this.props.jumpTo(move)}>
-            {move === this.props.stepNumber ? <b>{desc}</b> : desc}
-          </button>
-        </li>
-      );
-    })
-
-    //reverse the sort order here if needed
-    if(this.state.moveorder === 'newest'){
-      moves.reverse();
-    }
-
-    return (
-      <div className="move-list">
-        {/* {this.renderMoveSortButton()} */}
-        <button onClick={() => this.toggleMoveOrder()}>
-            {this.state.moveorder === 'oldest' ? 'See Moves newset first' : 'See Moves oldest first'}
-        </button>
-        <ol>{moves}</ol>
-      </div>
-    );        
-  }
-}
+import { Board } from './Board';
+import { MoveHistory } from './MoveHistory';
+import { GameSummary } from './GameSummary';
 
 export default class Game extends React.Component {
   constructor(props){
@@ -111,6 +17,8 @@ export default class Game extends React.Component {
       xIsNext: this.props.xIsFirst,
       gameType: this.props.gameType,
       keepTally: this.props.keepTally,
+      tallyX: 0,
+      tallyO: 0,
     };
   }
 
@@ -124,10 +32,12 @@ export default class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if(calculateWinner(squares) || squares[i]){
+    let winner = calculateWinner(squares);
+    if(winner || squares[i]){
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+    winner = calculateWinner(squares);
     this.setState({
       history: history.concat([{
         squares: squares,
@@ -135,6 +45,8 @@ export default class Game extends React.Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+      tallyX: winner && winner.XorY === 'X' ? this.state.tallyX + 1 : this.state.tallyX,
+      tallyO: winner && winner.XorY === 'Y' ? this.state.tallyO + 1 : this.state.tallyO,
     });
   }
   
@@ -160,7 +72,7 @@ export default class Game extends React.Component {
     return (
       <div className="gamepage">
       <div className="setupLink">
-        {this.props.settingsLink}
+        <Link className="pageLink" to="/">Setup</Link>
       </div>
       <div className="game">
       <div className="game-board">
@@ -171,9 +83,12 @@ export default class Game extends React.Component {
         />
       </div>
       <div className="game-info">
-        <div className="game-status">{status}</div>
-        {/* <p>{this.props.xIsFirst?'True':'False'}</p>
-        <p>{this.props.gameType}</p> */}
+        <GameSummary
+          keepTally={this.state.keepTally}
+          tallyX={this.state.tallyX}
+          tallyO={this.state.tallyO}
+          status={status}
+        />
         <MoveHistory
           history={history}
           jumpTo={(step) => this.jumpTo(step)}
@@ -186,11 +101,6 @@ export default class Game extends React.Component {
   }
 }
 
-// ========================================
-// ReactDOM.render(
-//   <Game />,
-//   document.getElementById('root')
-// );
 
 function calculateWinner(squares){
   const lines = [

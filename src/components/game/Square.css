@@ -1,0 +1,21 @@
+.square {
+  background: #ddd;
+  border: 2px solid #999;
+  float: left;
+  font-size: 150px;
+  font-weight: bold;
+  line-height: 204px;
+  height: 204px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 204px;
+}
+.winsquare{
+  background-color: #76cbd2;
+}
+.square:focus {
+  outline: none;
+  background: #eee;
+}
