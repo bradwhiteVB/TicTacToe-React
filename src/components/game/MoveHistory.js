@@ -29,10 +29,10 @@ export class MoveHistory extends React.Component {
       moves.reverse();
     }
     return (<div className="move-list">
+      <ol>{moves}</ol>
       <button onClick={() => this.toggleMoveOrder()}>
         {this.state.moveorder === 'oldest' ? 'See Moves newset first' : 'See Moves oldest first'}
       </button>
-      <ol>{moves}</ol>
     </div>);
   }
 }
