@@ -19,8 +19,8 @@ This project started out as the tutotial from the React site. The current level 
 These are the current items on my TODO list for added features, refactoring:
 
 1. Allow the choice of who goes first X or O
-1. Keep tally of wins (allow reset)
-1. Add a randomiser to which starts first X or O
+1. Keep tally of wins - include "Next game button"
+1. Allow a "Game reset" if keeping tally to restart after ultimate winner decided
 1. Allow a Play Computer option
     1. first effort to be random selection (Easy mode)
     1. second game tree (Hard mode)
