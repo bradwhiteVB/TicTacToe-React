@@ -3,13 +3,19 @@ import './GameSummary.css';
 export function GameSummary(props) {
   let tallyX = '';
   let tallyO = '';
+  let statusColClass = "col-12";
   if (props.keepTally) {
-    tallyX = <span>X: {props.tallyX}</span>;
-    tallyO = <span>Y: {props.tallyO}</span>;
+    tallyX = <><div className="col-2 tally-name">X</div><div className="col-1 tally-result">{props.tallyX}</div></>;
+    tallyO = <><div className="col-2 tally-name">O</div><div className="col-1 tally-result">{props.tallyO}</div></>;
+    statusColClass = "col-6";
   }
-  return (<div className="gamesummary">
-    {tallyX}
-    <span>{props.status}</span>
-    {tallyO}
-  </div>);
+  return (
+    <div className="game-summary">
+      {tallyX}
+      <div className={statusColClass + " game-status"}>
+        {props.status}
+      </div>
+      {tallyO}
+    </div>
+  );
 }

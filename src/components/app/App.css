@@ -1,9 +1,31 @@
 /* Add app wide CSS here */
 body {
   font: 20px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
-  background-color: #bbb;
+  background-color: rgb(212, 211, 211);
 }
+
+/* Column sizing much like twitter bootstrap */
+[class*="col"]{
+  display: inherit;
+  height: inherit;
+  text-align: inherit;
+  flex-direction: inherit;
+  align-items: inherit;
+  justify-content: inherit;  
+}
+.col-1{width: calc(100% / 12);}
+.col-2{width: calc(100% / 6);}
+.col-3{width: calc(100% / 4);}
+.col-4{width: calc(100% / 3);}
+.col-6{width: calc(100% / 2);}
+.col-7{width: calc(100% / 12 * 7);}
+.col-8{width: calc(100% / 12 * 8);}
+.col-9{width: calc(100% / 12 * 9);}
+.col-10{width: calc(100% / 12 * 10);}
+.col-11{width: calc(100% / 12 * 11);}
+.col-12{width: 100%;}
+
+/* Page link buttons since they could be everywhere */
 .pageLink {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -13,12 +35,13 @@ body {
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: #3A68A1;
+  background: #4750ce;
   color: #fee1cc;
   text-decoration: none;
   padding: 8px 12px;
   text-decoration: none;
   font-size: larger;
+  display: inline-block;
 }
 a.pageLink:hover {
   text-decoration: underline;

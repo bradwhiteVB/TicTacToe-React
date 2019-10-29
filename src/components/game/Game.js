@@ -45,8 +45,8 @@ export default class Game extends React.Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
-      tallyX: winner && winner.XorY === 'X' ? this.state.tallyX + 1 : this.state.tallyX,
-      tallyO: winner && winner.XorY === 'Y' ? this.state.tallyO + 1 : this.state.tallyO,
+      tallyX: winner && winner.XorO === 'X' ? this.state.tallyX + 1 : this.state.tallyX,
+      tallyO: winner && winner.XorO === 'O' ? this.state.tallyO + 1 : this.state.tallyO,
     });
   }
   
@@ -64,38 +64,33 @@ export default class Game extends React.Component {
 
     let status;
     if(winner){
-      status = 'Winner: ' + winner.XorY;
+      status = 'Winner: ' + winner.XorO;
     }else{
       status = (history.length < 10)?'Next player: ' + (this.state.xIsNext ? 'X' : 'O'):'DRAW!';
     }
 
     return (
       <div className="gamepage">
-      <div className="setupLink">
         <Link className="pageLink" to="/">Back to Setup</Link>
-      </div>
-      <div className="game">
-      <div className="game-board">
-        <Board 
-          squares={current.squares}
-          winpattern={winner ? winner.pattern : []}
-          onClick={(i) => this.squareClick(i)}
-        />
-      </div>
-      <div className="game-info">
-        <GameSummary
-          keepTally={this.state.keepTally}
-          tallyX={this.state.tallyX}
-          tallyO={this.state.tallyO}
-          status={status}
-        />
-        <MoveHistory
-          history={history}
-          jumpTo={(step) => this.jumpTo(step)}
-          stepNumber={this.state.stepNumber}
-        />
-      </div>
-      </div>
+        <hr/>
+        <div className="game">
+          <GameSummary
+            keepTally={this.state.keepTally}
+            tallyX={this.state.tallyX}
+            tallyO={this.state.tallyO}
+            status={status}
+          />
+          <Board 
+            squares={current.squares}
+            winpattern={winner ? winner.pattern : []}
+            onClick={(i) => this.squareClick(i)}
+          />
+          <MoveHistory
+            history={history}
+            jumpTo={(step) => this.jumpTo(step)}
+            stepNumber={this.state.stepNumber}
+          />
+        </div>
       </div>
     );
   }
@@ -116,7 +111,7 @@ function calculateWinner(squares){
   for (let i = 0; i < lines.length; i++){
     const [a,b,c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
-      return {XorY: squares[a],pattern:[a,b,c]};
+      return {XorO: squares[a],pattern:[a,b,c]};
     }
   }
   return null;
