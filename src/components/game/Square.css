@@ -1,16 +1,14 @@
-.square {
+.square{
+  width: var(--square-size);
+  height: var(--square-size);
+  background-color: #757280;
   background: #ddd;
   border: 2px solid #999;
   float: left;
-  font-size: 150px;
+  font-size: calc(var(--square-size) - 6vmin);
   font-weight: bold;
-  line-height: 204px;
-  height: 204px;
-  margin-right: -1px;
-  margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 204px;
 }
 .winsquare{
   background-color: #76cbd2;

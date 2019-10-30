@@ -74,6 +74,7 @@ export default class Game extends React.Component {
         <Link className="pageLink" to="/">Back to Setup</Link>
         <hr/>
         <div className="game">
+          <div>
           <GameSummary
             keepTally={this.state.keepTally}
             tallyX={this.state.tallyX}
@@ -85,6 +86,7 @@ export default class Game extends React.Component {
             winpattern={winner ? winner.pattern : []}
             onClick={(i) => this.squareClick(i)}
           />
+          </div>
           <MoveHistory
             history={history}
             jumpTo={(step) => this.jumpTo(step)}

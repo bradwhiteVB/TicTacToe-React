@@ -1,5 +1,5 @@
 :root{
-  --max-width-board: 612px;
+  --square-size: 26vmin;
 }
 body {
   font: 20px "Century Gothic", Futura, sans-serif;
@@ -9,7 +9,7 @@ body {
 .status {
   margin-bottom: 10px;
 } 
-/* .game {
+.game {
   display: flex;
   flex-direction: row;
-} */
+}

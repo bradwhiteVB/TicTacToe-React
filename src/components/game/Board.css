@@ -1,5 +1,6 @@
-.board-row:after {
+.board-row{
   clear: both;
-  content: "";
-  display: table;
+  width: calc(var(--square-size) * 3);
+  height: var(--square-size);
+  background-color: #c8bdfa;
 }
