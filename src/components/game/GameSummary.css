@@ -15,9 +15,9 @@
   font-weight: bold;
 }
 [class*="tally"]{
-  background-color: black;
+  background-color: #252525;
   color:white;
 }
 .tally-result{
-  background-color: red;
+  background-color: #7a1a1a;
 }
